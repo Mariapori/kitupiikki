@@ -46,7 +46,7 @@ modules:
         QMAKEPATH: /app
     build-commands:
       - mkdir -p builddir
-      - cd builddir && qmake ../kitsas/kitsas.pro CONFIG+=release && make -j${FLATPAK_BUILDER_N_JOBS}
+      - cd builddir && qmake ../kitsas/kitsas.pro CONFIG+=release QMAKE_LIBDIR+=/app/lib64 QMAKE_INCDIR+=/app/include && make -j${FLATPAK_BUILDER_N_JOBS}
     sources:
       - type: dir
         path: .
