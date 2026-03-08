@@ -2,6 +2,8 @@ app-id: fi.kitsas.Kitsas
 runtime: org.kde.Platform
 runtime-version: '6.8'
 sdk: org.kde.Sdk
+base: io.qt.qtwebengine.BaseApp
+base-version: '6.8'
 command: kitsas
 
 finish-args:
@@ -15,6 +17,11 @@ finish-args:
   - --share=network
   # File access for bookkeeping databases
   - --filesystem=home
+  # QtWebEngine dictionaries
+  - --env=QTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries
+
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
 
 modules:
   # libzip – required by Kitsas on Linux
@@ -36,7 +43,7 @@ modules:
     buildsystem: qmake
     build-options:
       env:
-        QMAKEPATH: /usr/lib/sdk
+        QMAKEPATH: /app
     config-opts:
       - kitsas/kitsas.pro
       - CONFIG+=release
