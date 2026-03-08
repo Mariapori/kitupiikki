@@ -40,13 +40,13 @@ modules:
 
   # Kitsas application
   - name: kitsas
-    buildsystem: qmake
+    buildsystem: simple
     build-options:
       env:
         QMAKEPATH: /app
-    config-opts:
-      - kitsas/kitsas.pro
-      - CONFIG+=release
+    build-commands:
+      - mkdir -p builddir
+      - cd builddir && qmake ../kitsas/kitsas.pro CONFIG+=release && make -j${FLATPAK_BUILDER_N_JOBS}
     sources:
       - type: dir
         path: .
@@ -55,8 +55,8 @@ modules:
           - .flatpak-builder
           - build-*
     post-install:
-      - install -Dm755 kitsas ${FLATPAK_DEST}/bin/kitsas
-      - install -Dm644 ../kitsas.desktop ${FLATPAK_DEST}/share/applications/fi.kitsas.Kitsas.desktop
-      - install -Dm644 ../kitsas.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/fi.kitsas.Kitsas.svg
-      - install -Dm644 ../kitsas.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/fi.kitsas.Kitsas.png
-      - install -Dm644 ../fi.kitsas.Kitsas.metainfo.xml ${FLATPAK_DEST}/share/metainfo/fi.kitsas.Kitsas.metainfo.xml
+      - install -Dm755 builddir/kitsas ${FLATPAK_DEST}/bin/kitsas
+      - install -Dm644 kitsas.desktop ${FLATPAK_DEST}/share/applications/fi.kitsas.Kitsas.desktop
+      - install -Dm644 kitsas.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/fi.kitsas.Kitsas.svg
+      - install -Dm644 kitsas.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/fi.kitsas.Kitsas.png
+      - install -Dm644 fi.kitsas.Kitsas.metainfo.xml ${FLATPAK_DEST}/share/metainfo/fi.kitsas.Kitsas.metainfo.xml
