@@ -29,7 +29,7 @@ modules:
     sources:
       - type: archive
         url: https://libzip.org/download/libzip-1.11.2.tar.xz
-        sha256: 5ee2dce9e788e37b67dae7b0cc9e6fdb3a1edd454432135a8dbf3413fb07d50f
+        sha256: 5d471308cef4c4752bbcf973d9cd37ba4cb53739116c30349d4764ba1410dfc1
 
   # Kitsas application
   - name: kitsas
